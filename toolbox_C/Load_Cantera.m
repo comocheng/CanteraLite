@@ -1,4 +1,5 @@
 function Load_Cantera
+    addpath('Class', 'Utility');
     if ~libisloaded('cantera_shared')
         cantera_root = 'C:/Users/ssnit/anaconda3/envs/cantera';
         [~,warnings] = loadlibrary([cantera_root '/lib/cantera_shared.dll'], ...
