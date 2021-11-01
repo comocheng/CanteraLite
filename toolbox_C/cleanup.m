@@ -8,4 +8,5 @@ function cleanup()
     calllib('cantera_shared', 'ct_clearStorage');
     calllib('cantera_shared', 'ct_clearReactors');
     calllib('cantera_shared', 'ct_clearReactionPath');
+    clear all
 end

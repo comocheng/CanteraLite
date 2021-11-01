@@ -1,7 +1,7 @@
 function Load_Cantera
-    addpath('Class', 'Utility');
+    addpath('Class', 'Utility', 'PresetObjects');
     if ~libisloaded('cantera_shared')
-        cantera_root = 'C:/Users/ssnit/anaconda3/envs/cantera';
+        load('Utility/cantera_root.mat');
         [~,warnings] = loadlibrary([cantera_root '/lib/cantera_shared.dll'], ...
                                           [cantera_root '/include/cantera/clib/ctmatlab.h'], ...
                                           'includepath', [cantera_root '/include'], ...
