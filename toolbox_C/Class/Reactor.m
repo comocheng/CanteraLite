@@ -17,10 +17,6 @@ classdef Reactor < handle
         EnergyFlag
     end
     
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
     methods
         %% Reactor class constructor
         
@@ -56,7 +52,7 @@ classdef Reactor < handle
             end
             
             r.type = char(typ);
-            r.id = calllib(r.lib, 'reactor_new2', typ);
+            r.id = calllib(ct, 'reactor_new2', typ);
             
 %             if r.id < 0
 %                 error(geterr);
@@ -75,7 +71,7 @@ classdef Reactor < handle
         function clear(r)
             % Clear the reactor from memory.
             checklib;
-            calllib(r.lib, 'reactor_del', r.id);
+            calllib(ct, 'reactor_del', r.id);
         end
         
         function insert(r, gas)
@@ -110,7 +106,7 @@ classdef Reactor < handle
                 error('Wrong object type');
             end
             
-            calllib(r.lib, 'reactor_setThermoMgr', r.id, t.tp_id);
+            calllib(ct, 'reactor_setThermoMgr', r.id, t.tp_id);
         end
         
         function setKineticsMgr(r, k)
@@ -130,7 +126,7 @@ classdef Reactor < handle
                 error('Wrong object type');
             end
             
-            calllib(r.lib, 'reactor_setKineticsMgr', r.id, k.kin_id);
+            calllib(ct, 'reactor_setKineticsMgr', r.id, k.kin_id);
         end
         
         %% Reactor get methods
@@ -143,7 +139,7 @@ classdef Reactor < handle
             %    last call to 'advance' or 'step'. Unit: K.
             
             checklib;
-            temperature = calllib(r.lib, 'reactor_temperature', r.id);
+            temperature = calllib(ct, 'reactor_temperature', r.id);
         end
         
         function pressure = get.P(r)
@@ -154,7 +150,7 @@ classdef Reactor < handle
             %    last call to 'advance' or 'step'. Unit: Pa.
             
             checklib;
-            pressure = calllib(r.lib, 'reactor_pressure', r.id);
+            pressure = calllib(ct, 'reactor_pressure', r.id);
         end        
         
         function rho = get.D(r)
@@ -164,7 +160,7 @@ classdef Reactor < handle
             %    Density of the phase in the input. Unit: kg/m^3.
             
             checklib;
-            rho = calllib(r.lib, 'reactor_density', r.id);
+            rho = calllib(ct, 'reactor_density', r.id);
         end 
 
         function mass = get.M(r)
@@ -176,7 +172,7 @@ classdef Reactor < handle
             %    from the solution vector. Unit: kg.
             
             checklib;
-            mass = calllib(r.lib, 'reactor_mass', r.id);
+            mass = calllib(ct, 'reactor_mass', r.id);
         end
         
         function volume = get.V(r)
@@ -187,7 +183,7 @@ classdef Reactor < handle
             %    last call to 'advance' or 'step'. Unit: m^3.
             
             checklib;
-            volume = calllib(r.lib, 'reactor_volume', r.id);
+            volume = calllib(ct, 'reactor_volume', r.id);
         end          
         
         function enthalpy_mass = get.H(r)
@@ -199,7 +195,7 @@ classdef Reactor < handle
             %    is retrieved from the solution vector. Unit: J/kg. 
             
             checklib;
-            enthalpy_mass = calllib(r.lib, 'reactor_enthalpy_mass', r.id);
+            enthalpy_mass = calllib(ct, 'reactor_enthalpy_mass', r.id);
         end        
         
         function intEnergy_mass = get.U(r)
@@ -212,7 +208,7 @@ classdef Reactor < handle
             %    Unit: J/kg. 
             
             checklib;
-            intEnergy_mass = calllib(r.lib, 'reactor_intEnergy_mass', r.id);
+            intEnergy_mass = calllib(ct, 'reactor_intEnergy_mass', r.id);
         end
         
         function yi = massFraction(r, species)
@@ -224,11 +220,11 @@ classdef Reactor < handle
             checklib;
             
             if ischar(species)
-                k = r.contents.thermo.speciesIndex(species) - 1;
+                k = r.contents.speciesIndex(species) - 1;
             else k = species - 1;
             end
             
-            yi = calllib(r.lib, 'reactor_massFraction', r.id, k);
+            yi = calllib(ct, 'reactor_massFraction', r.id, k);
         end
         
         function massFractions = get.Y(r)
@@ -256,7 +252,7 @@ classdef Reactor < handle
             %    Initial volume in m^3.
             
             checklib;
-            calllib(r.lib, 'reactor_setInitialVolume', r.id, v0);
+            calllib(ct, 'reactor_setInitialVolume', r.id, v0);
         end
 
         function r = set.Mdot(r, MFR)
@@ -266,7 +262,7 @@ classdef Reactor < handle
             %    Mass flow rate in kg/s.
             
             checklib;
-            calllib(r.lib, 'reactor_setMassFlowRate', r.id, MFR);
+            calllib(ct, 'reactor_setMassFlowRate', r.id, MFR);
             r.Mdot = MFR;
         end        
         
@@ -296,7 +292,7 @@ classdef Reactor < handle
             else error('Input must be "on" or "off"');
             end
             
-            calllib(r.lib, 'reactor_setChemistry', r.id, iflag);
+            calllib(ct, 'reactor_setChemistry', r.id, iflag);
             r.ChemistryFlag = flag;
         end
         
@@ -326,7 +322,7 @@ classdef Reactor < handle
             end
             
             if iflag >= 0
-                calllib(r.lib, 'reactor_setEnergy', r.id, iflag);
+                calllib(ct, 'reactor_setEnergy', r.id, iflag);
             else error('Input must be "on" or "off".');
             end
             

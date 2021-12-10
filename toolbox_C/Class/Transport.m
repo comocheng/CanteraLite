@@ -1,13 +1,10 @@
 classdef Transport < handle
+    
     properties
         th
         tr_id
     end
-    
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
+
     methods
         %% Transport class constructor
         
@@ -28,10 +25,10 @@ classdef Transport < handle
             else
                 tr.th = tp;
                 if strcmp(model, 'default')
-                    tr.tr_id = calllib(tr.lib, 'trans_newDefault', ...
+                    tr.tr_id = calllib(ct, 'trans_newDefault', ...
                                        tp.tp_id, loglevel);
                 else
-                    tr.tr_id = calllib(tr.lib, 'trans_new', model, ...
+                    tr.tr_id = calllib(ct, 'trans_new', model, ...
                                        tp.tp_id, loglevel);
                 end
             end
@@ -39,11 +36,11 @@ classdef Transport < handle
         
         %% Utility methods
         
-        function clear(tr)
+        function tr_clear(tr)
             % Delete the kernel object. 
             
             checklib;
-            calllib(tr.lib, 'trans_del', tr.tr_id);
+            calllib(ct, 'trans_del', tr.tr_id);
         end
         
         %% Transport Methods
@@ -55,7 +52,7 @@ classdef Transport < handle
             %    Double dynamic viscosity. Unit: Pa*s.
             
             checklib;
-            v = calllib(tr.lib, 'trans_viscosity', tr.tr_id);
+            v = calllib(ct, 'trans_viscosity', tr.tr_id);
             if v == -1.0
                 error(geterr);
             elseif v < 0.0
@@ -63,14 +60,14 @@ classdef Transport < handle
             end
         end
         
-        function v = thermaoConductivity(tr)
+        function v = thermalConductivity(tr)
             % Get the thermal conductivity.
             % 
             % :return:
             %    Double thermal conductivity. Unit: W/m-K.
             
             checklib;
-            v = calllib(tr.lib, 'trans_thermalConductivity', tr.tr_id);
+            v = calllib(ct, 'trans_thermalConductivity', tr.tr_id);
             if v == -1.0
                 error(geterr);
             elseif v < 0.0
@@ -85,7 +82,7 @@ classdef Transport < handle
             %    Double electrical conductivity. Unit: S/m.
             
             checklib;
-            v = calllib(tr.lib, 'trans_electricalConductivity', tr.tr_id);
+            v = calllib(ct, 'trans_electricalConductivity', tr.tr_id);
             if v == -1.0
                 error(geterr);
             elseif v < 0.0
@@ -104,7 +101,7 @@ classdef Transport < handle
             nsp = tr.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(tr.lib, 'trans_getMixDiffCoeffs', tr.tr_id, nsp, pt);
+            calllib(ct, 'trans_getMixDiffCoeffs', tr.tr_id, nsp, pt);
             v = pt.Value;
         end         
         
@@ -119,7 +116,7 @@ classdef Transport < handle
             nsp = tr.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(tr.lib, 'trans_getThermalDiffCoeffs', tr.tr_id, nsp, pt);
+            calllib(ct, 'trans_getThermalDiffCoeffs', tr.tr_id, nsp, pt);
             v = pt.Value;
         end
         
@@ -134,7 +131,7 @@ classdef Transport < handle
             nsp = tr.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(tr.lib, 'trans_getBinDiffCoeffs', tr.tr_id, nsp, pt);
+            calllib(ct, 'trans_getBinDiffCoeffs', tr.tr_id, nsp, pt);
             v = pt.Value;
         end
         
@@ -149,7 +146,7 @@ classdef Transport < handle
             nsp = tr.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(tr.lib, 'trans_getMultiDiffCoeffs', tr.tr_id, nsp, pt);
+            calllib(ct, 'trans_getMultiDiffCoeffs', tr.tr_id, nsp, pt);
             v = pt.Value;
         end
         
@@ -161,7 +158,7 @@ classdef Transport < handle
             % :param p:
         
             checklib;
-            calllib(tr.lib, 'trans_setParameters', tr.tr_id, type, k, p);
+            calllib(ct, 'trans_setParameters', tr.tr_id, type, k, p);
         end
         
         function setThermalConductivity(tr, lam)
@@ -171,7 +168,7 @@ classdef Transport < handle
             %    Thermal conductivity in W/(m-K).
             
             checklib;
-            setParameters(tr, 1, 0, lam);
+            tr.setParameters(1, 0, lam);
         end
         
     end

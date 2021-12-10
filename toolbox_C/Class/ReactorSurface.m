@@ -6,10 +6,6 @@ classdef ReactorSurface < handle
         reactor
     end
     
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
     methods
         %% ReactorSurface class constructor
         
@@ -40,14 +36,14 @@ classdef ReactorSurface < handle
                                    
             checklib;
             
-            s.id = calllib(s.lib, 'reactorsurface_new', 0);
+            s.id = calllib(ct, 'reactorsurface_new', 0);
             s.reactor = -1;
 %             if r.id < 0
 %                 error(geterr);
 %             end
            
             if nargin >= 1
-                s.setKinetics(s, kleft);
+                s.setKinetics(kleft);
             end
             
             if nargin >= 2
@@ -60,7 +56,7 @@ classdef ReactorSurface < handle
             
             if nargin >= 3
                 if isnumeric(area)
-                    s.setArea(area);
+                    s.area = area;
                 else
                     warning('Area was not a number and was not set');
                 end
@@ -73,14 +69,14 @@ classdef ReactorSurface < handle
         function clear(s)
             % Clear the ReactorSurface object from the memory.
             checklib;
-            calllib(s.lib, 'reactorsurface_del', s.id);
+            calllib(ct, 'reactorsurface_del', s.id);
         end
         
         function install(s, r)
             % Install a ReactorSurface in a Reactor.
             checklib;
             s.reactor = r;
-            calllib(s.lib, 'reactorsurface_install', s.id, r.id);
+            calllib(ct, 'reactorsurface_install', s.id, r.id);
         end
         
         %% ReactorSurface get methods
@@ -88,7 +84,7 @@ classdef ReactorSurface < handle
         function a = get.area(s)
             % Get the areaof the reactor surface in m^2.
             checklib;
-            a = calllib(s.lib, 'reactorsurface_area', s.id);
+            a = calllib(ct, 'reactorsurface_area', s.id);
         end
         
         %% ReactorSurface set methods
@@ -96,7 +92,7 @@ classdef ReactorSurface < handle
         function s = set.area(s, a)
             % Set the area of a reactor surface
             checklib;
-            calllib(s.lib, 'reactorsurface_setArea', s.id, a);
+            calllib(ct, 'reactorsurface_setArea', s.id, a);
         end
         
         function setKinetics(s, kin)
@@ -113,7 +109,7 @@ classdef ReactorSurface < handle
                 ikin = kin.id;
             end
             
-            calllib(s.lib, 'reactorsurface_setkinetics', s.id, ikin);
+            calllib(ct, 'reactorsurface_setkinetics', s.id, ikin);
         end
         
     end

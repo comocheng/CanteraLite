@@ -7,11 +7,7 @@ classdef ReactorNet < handle
         atol
         rtol
     end
-    
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
+
     methods
         %% ReactorNet class constructor
         
@@ -39,7 +35,7 @@ classdef ReactorNet < handle
                 reactors = {reactor};
             end
             
-            r.id = calllib(r.lib, 'reactornet_new');
+            r.id = calllib(ct, 'reactornet_new');
 %             if r.id < 0
 %                 error(geterr);
 %             end
@@ -56,7 +52,7 @@ classdef ReactorNet < handle
         function clear(r)
             % Clear the ReactorNet object from the memory.
             checklib;
-            calllib(r.lib, 'reactornet_del', r.id);
+            calllib(ct, 'reactornet_del', r.id);
         end
         
         function addReactor(net, reactor)
@@ -68,7 +64,7 @@ classdef ReactorNet < handle
             %    Instance of class 'Solution'.
             
             checklib;
-            calllib(net.lib, 'reactornet_addreactor', net.id, reactor.id);
+            calllib(ct, 'reactornet_addreactor', net.id, reactor.id);
         end
         
         function advance(r, tout)
@@ -85,7 +81,7 @@ classdef ReactorNet < handle
             %    End time of the integration. Unit: s.
             
             checklib;
-            calllib(r.lib, 'reactornet_advance', r.id, tout);
+            calllib(ct, 'reactornet_advance', r.id, tout);
         end
                
         %% ReactorNet set methods
@@ -98,7 +94,7 @@ classdef ReactorNet < handle
             %    current state as the initial condition. Unit: s.
             
             checklib;
-            calllib(r.lib, 'reactornet_setInitialTime', r.id, t);
+            calllib(ct, 'reactornet_setInitialTime', r.id, t);
         end
         
         function setMaxTimeStep(r, maxstep)
@@ -113,7 +109,7 @@ classdef ReactorNet < handle
             % upper bound on the timestep. 
             
             checklib;
-            calllib(r.lib, 'reactornet_setMaxTimeStep', r.id, maxstep);
+            calllib(ct, 'reactornet_setMaxTimeStep', r.id, maxstep);
         end 
         
         function setTolerances(r, rerr, aerr)
@@ -125,7 +121,7 @@ classdef ReactorNet < handle
             %    Scalar absolute error tolerance.
             
             checklib;
-            calllib(r.lib, 'reactornet_setTolerances', r.id, rerr, aerr);
+            calllib(ct, 'reactornet_setTolerances', r.id, rerr, aerr);
         end
         
         %% ReactorNet get methods
@@ -139,25 +135,25 @@ classdef ReactorNet < handle
             % rapidly changing, the time step becomes smaller to resolve
             % the solution. 
             checklib;
-            t = calllib(r.lib, 'reactor_step', r.id);
+            t = calllib(ct, 'reactor_step', r.id);
         end
         
         function t = get.time(r)
             % Get the current time in s.
             checklib;
-            t = calllib(r.lib, 'reactornet_time', r.id);
+            t = calllib(ct, 'reactornet_time', r.id);
         end
         
         function t = get.rtol(r)
             % Get the relative error tolerance
             checklib;
-            t = calllib(r.lib, 'reactornet_rtol', r.id);
+            t = calllib(ct, 'reactornet_rtol', r.id);
         end
         
         function t = get.atol(r)
             % Get the absolute error tolerance
             checklib;
-            t = calllib(r.lib, 'reactornet_atol', r.id);
+            t = calllib(ct, 'reactornet_atol', r.id);
         end
         
     end

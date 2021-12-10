@@ -5,10 +5,6 @@ classdef Interface < handle
         kin
     end
     
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
     methods
         %% Interface class constructor
         
@@ -55,7 +51,7 @@ classdef Interface < handle
             nsp = s.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(s.lib, 'surf_getCoverages', surf_id, xx);
+            calllib(ct, 'surf_getCoverages', surf_id, xx);
             c = pt.Value;
             
             if nargout == 0
@@ -84,7 +80,7 @@ classdef Interface < handle
             nsp = s.th.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
-            calllib(s.lib, 'surf_getConcentrations', surf_id, xx);
+            calllib(ct, 'surf_getConcentrations', surf_id, xx);
             c = pt.Value;
             
             if nargout == 0
@@ -124,14 +120,14 @@ classdef Interface < handle
                 sz = length(cov);
                 if sz == nsp
                     if ((m == nsp && n == 1) || (m == 1 & n == nsp))
-                        calllib(s.lib, 'surf_setCoverages', surf_id, cov, norm_flag);
+                        calllib(ct, 'surf_setCoverages', surf_id, cov, norm_flag);
                     else error('wrong size for coverage array');
                     end
                 else
                     error('wrong size for coverage array');
                 end
             elseif isa(cov, 'char')
-                calllib(s.lib, 'surf_setCoveragesByName', surf_id, cov);
+                calllib(ct, 'surf_setCoveragesByName', surf_id, cov);
             end
         end
         
