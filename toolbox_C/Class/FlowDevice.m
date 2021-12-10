@@ -32,7 +32,7 @@ classdef FlowDevice < handle
             end
             
             x.type = typ;
-            x.id = calllib(x.lib, 'flowdev_new2', typ);
+            x.id = calllib(ct, 'flowdev_new2', typ);
 %             if x.id < 0
 %                 error(geterr);
 %             end

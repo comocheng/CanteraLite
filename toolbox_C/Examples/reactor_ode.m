@@ -28,8 +28,8 @@ function dydt = reactor_ode(t, y, gas, vdot, area, heatflux)
         v_mass = vol/total_mass;
 
         % set the state of the gas by specifying (u,v,{Y_k})
-        gas.Y = masses;;
-        gas.UV = {u_mass v_mass}
+        gas.Y = masses;
+        gas.UV = {u_mass v_mass};
         p = gas.P;
 
         % volume equation
@@ -41,11 +41,11 @@ function dydt = reactor_ode(t, y, gas, vdot, area, heatflux)
         udt = -p * vdt + a * q;
 
         % species equations
-        ydt = total_mass * ydot(gas);
+        ydt = total_mass * gas.ydot;
 
         % set up column vector for dydt
         dydt(:,j) = [udt
             vdt
-            ydt ];
+            ydt' ];
     end
 end

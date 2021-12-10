@@ -60,7 +60,7 @@ classdef Transport < handle
             end
         end
         
-        function v = thermaoConductivity(tr)
+        function v = thermalConductivity(tr)
             % Get the thermal conductivity.
             % 
             % :return:

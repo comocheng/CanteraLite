@@ -496,7 +496,7 @@ classdef Kinetics < handle
             end            
         end
 
-        function ydot = massProdRates(kin)
+        function massProdRate = ydot(kin)
             % Get the mass production rates of the species.
             %
             % :return:
@@ -507,7 +507,7 @@ classdef Kinetics < handle
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
             calllib(ct, 'kin_getSourceTerms', kin.kin_id, nsp, pt);
-            ydot = pt.Value;       
+            massProdRate = pt.Value;       
         end        
         
 %         function e = reactionEqn(kin, irxn)

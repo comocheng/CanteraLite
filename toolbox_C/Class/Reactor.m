@@ -220,7 +220,7 @@ classdef Reactor < handle
             checklib;
             
             if ischar(species)
-                k = r.contents.thermo.speciesIndex(species) - 1;
+                k = r.contents.speciesIndex(species) - 1;
             else k = species - 1;
             end
             

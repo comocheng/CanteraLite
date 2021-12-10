@@ -1013,6 +1013,23 @@ classdef ThermoPhase < handle
         
         %% PhaseSet single methods
         
+        function tp = setElectricPotential(tp, phi)
+            % Set the electric potential in V.
+            calllib(ct, 'thermo_setElectricPotential', tp.tp_id, phi);
+        end
+        
+        function tp = setState_Psat(tp, p, q)
+            % Set saturated vapor
+            checklib;
+            calllib(ct, 'thermo_setState_Psat', tp.tp_id, p, q);
+        end
+        
+        function tp = setState_Tsat(tp, t, q)
+            % Set saturated liquid
+            checklib;
+            calllib(ct, 'thermo_setState_Tsat', tp.tp_id, t, 1 - q);
+        end
+        
         function set.T(tp, temperature)
             checklib;
             if temperature <= 0

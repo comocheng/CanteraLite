@@ -4,7 +4,6 @@ function reactor2(g)
 %    This example illustrates how to use class 'Reactor' for
 %    zero-dimensional kinetics simulations. Here the parameters are
 %    set so that the reactor is adiabatic and constant volume.
-%
 
     help reactor2
 
