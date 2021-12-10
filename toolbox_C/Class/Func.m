@@ -7,11 +7,7 @@ classdef Func < handle
         id
         typ
     end
-    
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
+  
     methods
         %% Functor class constructor
         
@@ -81,13 +77,13 @@ classdef Func < handle
                     ptr = libpointer('doublePtr', p);
                     [m, n] = size(p);
                     lenp = m * n;
-                    nn = calllib(x.lib, 'func_new', type, n, lenp, ptr);
+                    nn = calllib(ct, 'func_new', type, n, lenp, ptr);
                 elseif itype < 45
                     m = n;
-                    nn = calllib(x.lib, 'func_new', type, n, m, 0);
+                    nn = calllib(ct, 'func_new', type, n, m, 0);
                 else
                     ptr = libpointer('doublePtr', p);
-                    nn = calllib(x.lib, 'func_new', type, n, 0, ptr);
+                    nn = calllib(ct, 'func_new', type, n, 0, ptr);
                 end                    
             end
                      
@@ -124,7 +120,7 @@ classdef Func < handle
         function clear(f)
             % Clear the functor from memory.
             checklib;
-            calllib(f.lib, 'func_del', f.id);
+            calllib(ct, 'func_del', f.id);
         end
         
         function display(a)
@@ -174,7 +170,7 @@ classdef Func < handle
                 ind= s.subs{:};
                  b = zeros(1, length(ind));
                  for k = 1:length(ind)
-                     b(k) = calllib(a.lib, 'func_value', a.id, ind(k));
+                     b(k) = calllib(ct, 'func_value', a.id, ind(k));
                  end
             else error('Specify value for x as p(x)');
             end

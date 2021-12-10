@@ -8,10 +8,6 @@ classdef XML_Node < handle
         rtol
     end
     
-    properties(Constant = true)
-        lib = 'cantera_shared'
-    end
-    
     methods
         %% ReactorNet class constructor
         
@@ -33,12 +29,12 @@ classdef XML_Node < handle
                 x.id = wrap;
             elseif nargin == 2
                 % read tree from a file
-                x.id = calllib(x.lib, 'xml_get_XML_File', src, 0);
+                x.id = calllib(ct, 'xml_get_XML_File', src, 0);
 %                 if x.id < 0
 %                     error(geterr);
 %                 end
             elseif nargin == 1
-                x.id = calllib(x.lib, 'xml_new', name);
+                x.id = calllib(ct, 'xml_new', name);
             end
         end
         
@@ -47,7 +43,7 @@ classdef XML_Node < handle
         function clear(x)
             % Clear the XML_Node object from the memory.
             checklib;
-            calllib(x.lib, 'xml_del', x.id);
+            calllib(ct, 'xml_del', x.id);
         end
         
         function n = addChild(root, name, val)
@@ -82,16 +78,16 @@ classdef XML_Node < handle
             checklib;
             
             if nargin == 3 && pre > 0
-                calllib(x.lib, 'xml_get_XML_file', file, 0);
+                calllib(ct, 'xml_get_XML_file', file, 0);
             else
-                calllib(x.lib, 'xml_build', x.id, file);
+                calllib(ct, 'xml_build', x.id, file);
             end
         end
         
         function write(x, file)
             % Write XML_Node to file.
             checklib;
-            calllib(x.lib, 'xml_write', x.id, file);
+            calllib(ct, 'xml_write', x.id, file);
         end
         
         %% XML get methods
@@ -99,7 +95,7 @@ classdef XML_Node < handle
         function v = child(x, loc)
             % Get the child of an XML_Node.
             checklib;
-            index = calllib(x.lib, 'xml_child', x.id, loc);
+            index = calllib(ct, 'xml_child', x.id, loc);
             v = XML_Node('', '', index);
         end
         
@@ -146,7 +142,7 @@ classdef XML_Node < handle
             %    Instance of class 'XML_Node'.
             
             checklib;
-            a = calllib(x.lib, 'xml_attrib', x.id, key);
+            a = calllib(ct, 'xml_attrib', x.id, key);
             % Revisit this since it returns a string! 
         end
 
@@ -160,7 +156,7 @@ classdef XML_Node < handle
                 index = c.id;
             else index = x.id;
             
-            calllib(x.lib, 'xml_value', x.id, index);
+            calllib(ct, 'xml_value', x.id, index);
             % Revisit this since it returns a string! 
         end        
         

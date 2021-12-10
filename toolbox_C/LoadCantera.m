@@ -1,6 +1,7 @@
-function Load_Cantera
-    addpath('Class', 'Utility', 'PresetObjects', 'Examples');
-    if ~libisloaded('cantera_shared')
+function LoadCantera
+    addpath('Class', 'Utility', 'PresetMixtures', 'PresetReactors', ...
+            'PresetObjects', '1D', 'Examples');
+    if ~libisloaded(ct)
         load('Utility/cantera_root.mat');
         [~,warnings] = loadlibrary([cantera_root '/lib/cantera_shared.dll'], ...
                                           [cantera_root '/include/cantera/clib/ctmatlab.h'], ...
