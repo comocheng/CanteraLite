@@ -1056,23 +1056,28 @@ classdef ThermoPhase < handle
         
         function set.X(tp, xx)
             checklib;
+            lim = 1e-9;
             if isa(xx, 'double')
-                ptr = libpointer('doublePtr', xx);
                 nsp = tp.nSpecies;
-                norm = 0;
+                if sum(xx) - 1 <= 1e-9
+                    norm = 0;
+                else norm = 1;
+                end
                 calllib(ct, 'thermo_setMoleFractions', tp.tp_id, ...
-                        nsp, ptr, norm);
+                        nsp, xx, norm);
             end                   
         end
         
         function set.Y(tp, yy)
             checklib;
             if isa(yy, 'double')
-                ptr = libpointer('doublePtr', yy);
                 nsp = tp.nSpecies;
-                norm = 0;
+                if sum(yy) -1 <= 1e-9
+                    norm = 0;
+                else norm = 1;
+                end
                 calllib(ct, 'thermo_setMassFractions', tp.tp_id, ...
-                        nsp, ptr, norm);
+                        nsp, yy, norm);
             end                   
         end  
         
@@ -1092,13 +1097,13 @@ classdef ThermoPhase < handle
         end
         
         function set.DPX(tp, input)
-            tp.DP = input(1:2);
             tp.X = input{3};
+            tp.DP = input(1:2);
         end
         
         function set.DPY(tp, input)
+            tp.Y = input{3};            
             tp.DP = input(1:2);
-            tp.Y = input{3};
         end
         
         function set.HP(tp, input)
@@ -1112,13 +1117,13 @@ classdef ThermoPhase < handle
         end
         
         function set.HPX(tp, input)
-            tp.HP = input(1:2);
             tp.X = input{3};
+            tp.HP = input(1:2);
         end        
 
         function set.HPY(tp, input)
-            tp.HP = input(1:2);
             tp.Y = input{3};
+            tp.HP = input(1:2);
         end
         
         function set.PV(tp, input)
@@ -1135,13 +1140,13 @@ classdef ThermoPhase < handle
         end
         
         function set.PVX(tp, input)
-            tp.PV = input(1:2);
             tp.X = input{3};
+            tp.PV = input(1:2);
         end        
 
         function set.PVY(tp, input)
-            tp.PV = input(1:2);
             tp.Y = input{3};
+            tp.PV = input(1:2);
         end               
 
         function set.SH(tp, input)
@@ -1152,13 +1157,13 @@ classdef ThermoPhase < handle
         end
 
         function set.SHX(tp, input)
-            tp.SH = input(1:2);
             tp.X = input{3};
+            tp.SH = input(1:2);
         end           
 
         function set.SHY(tp, input)
-            tp.SH = input(1:2);
             tp.Y = input{3};
+            tp.SH = input(1:2);
         end          
         
         function set.SP(tp, input)
@@ -1172,13 +1177,13 @@ classdef ThermoPhase < handle
         end
 
         function set.SPX(tp, input)
-            tp.SP = input(1:2);
             tp.X = input{3};
+            tp.SP = input(1:2);
         end           
 
         function set.SPY(tp, input)
-            tp.SP = input(1:2);
             tp.Y = input{3};
+            tp.SP = input(1:2);
         end  
 
         function set.ST(tp, input)
@@ -1192,13 +1197,13 @@ classdef ThermoPhase < handle
         end
 
         function set.STX(tp, input)
-            tp.ST = input(1:2);
             tp.X = input{3};
+            tp.ST = input(1:2);
         end           
 
         function set.STY(tp, input)
-            tp.ST = input(1:2);
             tp.Y = input{3};
+            tp.ST = input(1:2);
         end
          
         function set.SV(tp, input)
@@ -1212,13 +1217,13 @@ classdef ThermoPhase < handle
         end
 
         function set.SVX(tp, input)
-            tp.SV = input(1:2);
             tp.X = input{3};
+            tp.SV = input(1:2);
         end           
 
         function set.SVY(tp, input)
-            tp.SP = input(1:2);
             tp.Y = input{3};
+            tp.SP = input(1:2);
         end            
         
         function set.TD(tp, input)
@@ -1235,13 +1240,13 @@ classdef ThermoPhase < handle
         end        
         
         function set.TDX(tp, input)
-            tp.TD = input(1:2);
-            tp.X = input{3};           
+            tp.X = input{3};              
+            tp.TD = input(1:2);      
         end        
         
         function set.TDY(tp, input)
-            tp.TD = input(1:2);
-            tp.Y = input{3};           
+            tp.Y = input{3};             
+            tp.TD = input(1:2);        
         end
         
         function set.TH(tp, input)
@@ -1255,13 +1260,13 @@ classdef ThermoPhase < handle
         end
 
         function set.THX(tp, input)
-            tp.TH = input(1:2);
             tp.X = input{3};
+            tp.TH = input(1:2);
         end           
 
         function set.THY(tp, input)
-            tp.TH = input(1:2);
             tp.Y = input{3};
+            tp.TH = input(1:2);
         end           
         
         function set.TP(tp, input)
@@ -1278,13 +1283,13 @@ classdef ThermoPhase < handle
         end        
                    
         function set.TPX(tp, input)
-            tp.TP = input(1:2);
             tp.X = input{3};
+            tp.TP = input(1:2);
         end
        
         function set.TPY(tp, input)
+            tp.Y = input{3};            
             tp.TP = input(1:2);
-            tp.Y = input{3};
         end        
         
         function set.TV(tp, input)
@@ -1301,13 +1306,13 @@ classdef ThermoPhase < handle
         end
         
         function set.TVX(tp, input)
-            tp.TV = input(1:2);
             tp.X = input{3};
+            tp.TV = input(1:2);
         end
         
         function set.TVY(tp, input)
-            tp.TV = input(1:2);
             tp.Y = input{3};
+            tp.TV = input(1:2);
         end
         
         function set.UP(tp, input)
@@ -1321,13 +1326,13 @@ classdef ThermoPhase < handle
         end
         
         function set.UPX(tp, input)
-            tp.UP = input(1:2);
             tp.X = input{3};
+            tp.UP = input(1:2);
         end        
 
         function set.UPY(tp, input)
-            tp.UP = input(1:2);
             tp.Y = input{3};
+            tp.UP = input(1:2);
         end        
         
         function set.UV(tp, input)
@@ -1341,13 +1346,13 @@ classdef ThermoPhase < handle
         end
         
         function set.UVX(tp, input)
+            tp.X = input{3};  
             tp.UV = input(1:2);
-            tp.X = input{3};           
         end        
         
         function set.UVY(tp, input)
-            tp.UV = input(1:2);
-            tp.Y = input{3};           
+            tp.Y = input{3};  
+            tp.UV = input(1:2);      
         end
         
         function set.VH(tp, input)
@@ -1361,13 +1366,13 @@ classdef ThermoPhase < handle
         end
         
         function set.VHX(tp, input)
-            tp.VH = input(1:2);
             tp.X = input{3};
+            tp.VH = input(1:2);
         end        
 
         function set.VHY(tp, input)
-            tp.VH = input(1:2);
             tp.Y = input{3};
+            tp.VH = input(1:2);
         end            
         
         function tp = equilibrate(tp, xy, solver, rtol, maxsteps, ...
