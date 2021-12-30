@@ -1,8 +1,7 @@
-classdef Interface < handle
+classdef Interface < handle & ThermoPhase & Kinetics
     
     properties
-        th
-        kin
+        coverages
     end
     
     methods
@@ -13,32 +12,31 @@ classdef Interface < handle
             %    CTI or CTML file containing the interface or edge phase.
             % :param id:
             %    Name of the interface or edge phase in the source file.
-            % :param p1/P2/P3/P4:
+            % :param p1/p2/p3/p4:
             %    Adjoining phase to the interface;
             % :return:
             %    Instance of class 'Interface'.
             
             checklib;
             t = ThermoPhase(src, id);
+            s@ThermoPhase(src, id);
             if nargin == 2
-                k = Kinetics(t, src, id);
+                args = {};
             elseif nargin == 3
-                k = Kinetics(t, src, id, p1);
+                args = {p1};
             elseif nargin == 4
-                k = Kinetics(t, src, id, p1, p2);
+                args = {p1, p2};
             elseif nargin == 5
-                k = Kinetics(t, src, id, p1, p2, p3);
+                args = {p1, p2, p3};
             elseif nargin == 6
-                k = Kinetics(t, src, id, p1, p2, p3, p4);
+                args = {p1, p2, p3, p4};
             end
-            
-            s.kin = k;
-            s.th = t;
+            s@Kinetics(t, src, id, args{:});
         end
         
         %% Interface methods
         
-        function c = coverages(s)
+        function c = get.coverages(s)
             % Get the surface coverages of the species on an interface.
             %
             % :return:
@@ -47,8 +45,8 @@ classdef Interface < handle
             %    will be returned.
             
             checklib;
-            surf_id = s.th.tr_id;
-            nsp = s.th.nSpecies;
+            surf_id = s.tr_id;
+            nsp = s.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
             calllib(ct, 'surf_getCoverages', surf_id, xx);
@@ -59,7 +57,7 @@ classdef Interface < handle
                 set(gcf, 'Name', 'Coverages')
                 bar(c);
                 colormap(summer);
-                nm = speciesNames(s);
+                nm = s.speciesNames;
                 set(gca, 'XTickLabel', nm);
                 xlabel('Species Name');
                 ylabel('Coverage');
@@ -76,8 +74,8 @@ classdef Interface < handle
             %    will be returned.
             
             checklib;
-            surf_id = s.th.tr_id;
-            nsp = s.th.nSpecies;
+            surf_id = s.tr_id;
+            nsp = s.nSpecies;
             xx = zeros(1, nsp);
             pt = libpointer('doublePtr', xx);
             calllib(ct, 'surf_getConcentrations', surf_id, xx);
@@ -96,7 +94,7 @@ classdef Interface < handle
             end
         end
         
-        function setCoverages(s, cov, norm)
+        function set.coverages(s, cov, norm)
             % Set surface coverages of the species on an interface.
             %
             % :param cov:
@@ -112,8 +110,8 @@ classdef Interface < handle
                 norm_flag = 1;
             end
             
-            surf_id = s.th.tr_id;
-            nsp = s.th.nSpecies;
+            surf_id = s.tr_id;
+            nsp = s.nSpecies;
             [m, n] = size(cov);
                         
             if isa(cov, 'double')
