@@ -67,8 +67,8 @@ anode.TP = {T, P};
 cathode.TP = {T, P};
 elde.TP = {T, P};
 elyt.TP = {T, P};
-anode_interface.th.TP = {T, P};
-cathode_interface.th.TP = {T, P};
+anode_interface.TP = {T, P};
+cathode_interface.TP = {T, P};
 
 % Calculate cell voltage, separately for each entry of the input vectors
 V_cell = zeros(length(SOC),1);
@@ -79,13 +79,16 @@ for i = 1:length(SOC)
     phi_s_an = 0;
 
     % Calculate anode electrolyte potential
-    phi_l_an = fzero(@(E) anode_curr(phi_s_an,E,X_Li_an(i),anode,elde,elyt,anode_interface,S_an)-I_app, phi_l_an);
+    phi_l_an = fzero(@(E) anode_curr(phi_s_an, E, X_Li_an(i), anode, elde,...
+                                     elyt, anode_interface, S_an) - I_app, phi_l_an);
 
     % Calculate cathode electrolyte potential
     phi_l_ca = phi_l_an + I_app*R_elyt;
 
     % Calculate cathode electrode potential
-    phi_s_ca = fzero(@(E) cathode_curr(E,phi_l_ca,X_Li_ca(i),cathode,elde,elyt,cathode_interface,S_ca)-I_app, phi_s_ca);
+    phi_s_ca = fzero(@(E) cathode_curr(E, phi_l_ca, X_Li_ca(i), ...
+                                       cathode, elde, elyt, cathode_interface,...
+                                       S_ca) - I_app, phi_s_ca);
 
     % Calculate cell voltage
     V_cell(i) = phi_s_ca - phi_s_an;
@@ -93,11 +96,11 @@ end
 
 % Let's plot the cell voltage, as a function of the state of charge:
 figure(1);
-plot(SOC*100,V_cell,'linewidth',2.5)
-ylim([2.5,4.3])
+plot(SOC*100, V_cell, 'linewidth', 2.5)
+ylim([2.5, 4.3])
 xlabel('State of charge / %')
 ylabel('Cell voltage / V')
-set(gca,'fontsize',14)
+set(gca, 'fontsize', 14)
 
 
 %--------------------------------------------------------------------------
@@ -105,7 +108,7 @@ set(gca,'fontsize',14)
 % -----------------------------------------------------------------------------
 
 % This function returns the Cantera calculated anode current (in A)
-function anCurr = anode_curr(phi_s,phi_l,X_Li_an,anode,elde,elyt,anode_interface,S_an)
+function anCurr = anode_curr(phi_s, phi_l, X_Li_an, anode, elde, elyt, anode_interface, S_an)
     % Set the active material mole fraction
     anode.X = ['Li[anode]:' num2str(X_Li_an) ', V[anode]:' num2str(1-X_Li_an)];
 
@@ -115,14 +118,14 @@ function anCurr = anode_curr(phi_s,phi_l,X_Li_an,anode,elde,elyt,anode_interface
 
     % Get the net reaction rate at the anode-side interface
     % Reaction according to cti file: Li+[elyt] + V[anode] + electron <=> Li[anode]
-    r = anode_interface.kin.rop_net; % [kmol/m2/s]
+    r = anode_interface.rop_net; % [kmol/m2/s]
 
     % Calculate the current. Should be negative for cell discharge.
     anCurr = r*faradayconstant*S_an; %
 end
 
 % This function returns the Cantera calculated cathode current (in A)
-function caCurr = cathode_curr(phi_s,phi_l,X_Li_ca,cathode,elde,elyt,cathode_interface,S_ca)
+function caCurr = cathode_curr(phi_s, phi_l, X_Li_ca, cathode, elde, elyt, cathode_interface, S_ca)
     % Set the active material mole fractions
     cathode.X = ['Li[cathode]:' num2str(X_Li_ca) ', V[cathode]:' num2str(1-X_Li_ca)];
 
@@ -132,7 +135,7 @@ function caCurr = cathode_curr(phi_s,phi_l,X_Li_ca,cathode,elde,elyt,cathode_int
 
     % Get the net reaction rate at the cathode-side interface
     % Reaction according to cti file: Li+[elyt] + V[cathode] + electron <=> Li[cathode]
-    r = cathode_interface.kin.rop_net; % [kmol/m2/s]
+    r = cathode_interface.rop_net; % [kmol/m2/s]
 
     % Calculate the current. Should be negative for cell discharge.
     caCurr = r*faradayconstant*S_ca*(-1); %
