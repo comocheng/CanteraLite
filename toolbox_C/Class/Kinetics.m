@@ -58,9 +58,9 @@ classdef Kinetics < handle
         function n = isReversible(kin, i)
             % Get an array of flags indicating reversibility of a reaction.
             %
-            % :param i:
+            % parameter i:
             %    Integer reaction number.
-            % :return:
+            % return:
             %    1 if reaction number i is reversible. 0 if irreversible.
             
             checklib;
@@ -70,10 +70,10 @@ classdef Kinetics < handle
         function n = multiplier(kin, irxn)
             % Get the multiplier for reaction rate of progress.
             %
-            % :param irxn:
+            % parameter irxn:
             %    Integer reaction number for which the multiplier is
             %    desired.
-            % :return:
+            % return:
             %    Multiplier of the rate of progress of reaction irxn.
             
             checklib;
@@ -83,7 +83,7 @@ classdef Kinetics < handle
         function n = nReactions(kin)
             % Get the number of reactions.
             %
-            % :return:
+            % return:
             %    Integer number of reactions
             
             checklib;
@@ -93,7 +93,7 @@ classdef Kinetics < handle
         function n = nSpecies2(kin)
             % Get the total number of species. 
             %
-            % :return:
+            % return:
             %    Integer total number of species.
             
             checklib;
@@ -103,15 +103,15 @@ classdef Kinetics < handle
         function n = stoich_r(kin, species, rxns)
             % Get the reactant stoichiometric coefficients. 
             %
-            % :param species:
+            % parameter species:
             %    Species indices for which reactant stoichiometric 
             %    coefficients should be retrieved. Optional argument; if 
             %    specified, "rxns" must be specified as well. 
-            % :param rxns:
+            % parameter rxns:
             %    Reaction indicies for which reactant stoichiometric
             %    coefficients should be retrieved. Optional argument; if
             %    specified, "species" must be specified as well.
-            % :return:
+            % return:
             %    Returns a sparse matrix of all reactant stoichiometric
             %    coefficients. The matrix elements "nu(k, i)" is the
             %    stoichiometric coefficient of species k as a reactant in
@@ -150,15 +150,15 @@ classdef Kinetics < handle
         function n = stoich_p(kin, species, rxns)
             % Get the product stoichiometric coefficients. 
             %
-            % :param species:
+            % parameter species:
             %    Species indices for which product stoichiometric 
             %    coefficients should be retrieved. Optional argument; if 
             %    specified, "rxns" must be specified as well. 
-            % :param rxns:
+            % parameter rxns:
             %    Reaction indicies for which product stoichiometric
             %    coefficients should be retrieved. Optional argument; if
             %    specified, "species" must be specified as well.
-            % :return:
+            % return:
             %    Returns a sparse matrix of all product stoichiometric
             %    coefficients. The matrix elements "nu(k, i)" is the
             %    stoichiometric coefficient of species k as a product in
@@ -197,15 +197,15 @@ classdef Kinetics < handle
         function n = stoich_net(kin, species, rxns)
             % Get the net stoichiometric coefficients. 
             %
-            % :param species:
+            % parameter species:
             %    Species indices for which net stoichiometric coefficients
             %    should be retrieved. Optional argument; if specified,
             %    "rxns" must be specified as well. 
-            % :param rxns:
+            % parameter rxns:
             %    Reaction indicies for which net stoichiometric
             %    coefficients should be retrieved. Optional argument; if
             %    specified, "species" must be specified as well.
-            % :return:
+            % return:
             %    Returns a sparse matrix of all net stoichiometric
             %    coefficients. The matrix elements "nu(k, i)" is the
             %    stoichiometric coefficient of species k as a net in
@@ -229,7 +229,7 @@ classdef Kinetics < handle
         function cdot = creationRates(kin)
             % Get the chemical reaction rates.
             %
-            % :return:
+            % return:
             %    Returns a vector of the creation rates of all species. If
             %    the output is not assigned to a variable, a bar graph is
             %    produced. Unit: kmol/m^3-s.
@@ -253,7 +253,7 @@ classdef Kinetics < handle
         function ddot = destructionRates(kin)
             % Get the chemical destruction rates.
             %
-            % :return:
+            % return:
             %    Returns a vector of the destruction rates of all species. 
             %    If the output is not assigned to a variable, a bar graph 
             %    is produced. Unit: kmol/m^3-s.
@@ -277,7 +277,7 @@ classdef Kinetics < handle
         function wdot = netProdRates(kin)
             % Get the net chemical production rates for all species.
             %
-            % :return:
+            % return:
             %    Returns a vector of the net production (creation-destruction)
             %    rates of all species. If the output is not assigned to a 
             %    variable, a bar graph is produced. Unit: kmol/m^3-s.
@@ -301,7 +301,7 @@ classdef Kinetics < handle
         function q = rop_f(kin)
             % Get the forward rates of progress for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the forward rates of progress
             %    for all reactions. If this function is called without
             %    argument, a bar graph is produced. 
@@ -325,7 +325,7 @@ classdef Kinetics < handle
         function q = rop_r(kin)
             % Get the reverse rates of progress for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the reverse rates of progress
             %    for all reactions. If this function is called without
             %    argument, a bar graph is produced. 
@@ -349,7 +349,7 @@ classdef Kinetics < handle
         function q = rop(kin)
             % Get the forward and reverse rates of progress.
             %
-            % :return:
+            % return:
             %    Returns an I x 2 array of reaction rates of progress,
             %    where I is the number of reactions. The first column
             %    contains the forward rates of progress, and the second
@@ -374,7 +374,7 @@ classdef Kinetics < handle
         function q = rop_net(kin)
             % Get the net rates of progress for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the net rates of progress
             %    for all reactions. If this function is called without
             %    argument, a bar graph is produced. 
@@ -398,9 +398,9 @@ classdef Kinetics < handle
         function rxn = reactionEqn(kin, irxn)
             % Get the reaction equation of a reaction
             %
-            % :param irxn:
+            % parameter irxn:
             %    Optional. Integer or vector of reaction numbers.
-            % :return:
+            % return:
             %    String or cell arrray of strings of the reaction
             %    equations.
             
@@ -434,7 +434,7 @@ classdef Kinetics < handle
         function enthalpy = get.dH(kin)
             % Get the enthalpy of reaction for each reaction.
             %
-            % :return:
+            % return:
             %    Returns a vector of the enthalpy of reaction for each
             %    reaction. Unit: J/kmol. 
             
@@ -449,7 +449,7 @@ classdef Kinetics < handle
         function entropy = get.dS(kin)
             % Get the entropy of reaction for each reaction.
             %
-            % :return:
+            % return:
             %    Returns a vector of the entropy of reaction for each
             %    reaction. Unit: J/kmol-K. 
             
@@ -464,7 +464,7 @@ classdef Kinetics < handle
         function gibbs = get.dG(kin)
             % Get the Gibbs free energy of reaction for each reaction.
             %
-            % :return:
+            % return:
             %    Returns a vector of the Gibbs free energy of reaction for 
             %    each reaction. Unit: J/kmol. 
             
@@ -479,7 +479,7 @@ classdef Kinetics < handle
         function k = get.Kc(kin)
             % Get the equilibrium constants for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the equilibrium constants for
             %    all reactions. The vector has an entry for every reaction,
             %    whether reversible or not, but non-zero values occur only
@@ -505,7 +505,7 @@ classdef Kinetics < handle
         function k = get.Kf(kin)
             % Get the forward reaction rate constants for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the forward rates constants of
             %    all of the reactions. 
             
@@ -520,7 +520,7 @@ classdef Kinetics < handle
         function k = get.Kr(kin)
             % Get the reverse reaction rate constants for all reactions.
             %
-            % :return:
+            % return:
             %    Returns a column vector of the reverse rates constants of
             %    all of the reactions. 
             
@@ -535,7 +535,7 @@ classdef Kinetics < handle
         function massProdRate = ydot(kin)
             % Get the mass production rates of the species.
             %
-            % :return:
+            % return:
             %    Returns a vector of the mass production rates. 
             
             checklib;
@@ -551,10 +551,10 @@ classdef Kinetics < handle
         function n = setMultiplier(kin, irxn, v)
             % Set the multiplier for the reaction rate of progress.
             %
-            % :param irxn:
+            % parameter irxn:
             %    Integer of vector reaction numbers for which the
             %    multiplier should be set. Optional.
-            % :param v:
+            % parameter v:
             %    Value by which the reaction rate of progress should be
             %    multiplied. 
             
@@ -580,7 +580,7 @@ classdef Kinetics < handle
         function advanceCoeverages(kin, dt)
             % Advance the surface coveages forward in time
             %
-            % :param dt:
+            % parameter dt:
             %    Time interval by which the coverages should be advanced.
             
             calllib(ct, 'kin_advanceCoverages', kin.kin_id, dt);

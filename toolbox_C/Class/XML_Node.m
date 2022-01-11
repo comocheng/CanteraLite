@@ -12,14 +12,14 @@ classdef XML_Node < handle
         %% ReactorNet class constructor
         
         function x = XML_Node(name, src, wrap)
-            % :param name:
+            % parameter name:
             %    String name of the XML_node that should be created
-            % :param src:
+            % parameter src:
             %    String XML file name from which an instance of XML_Node
             %    should be created. Reads the XML tree from the input file.
-            % :param wrap:
+            % parameter wrap:
             %    Specify the ID of the XML_Node.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             
             checklib;
@@ -49,13 +49,13 @@ classdef XML_Node < handle
         function n = addChild(root, name, val)
             % Add a child to the root.
             %
-            % :param root:
+            % parameter root:
             %    Instance of class 'XML_Node'.
-            % :param name:
+            % parameter name:
             %    String ID of the child to be added.
-            % :param val:
+            % parameter val:
             %    String value to be added to the child.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             
             checklib;
@@ -65,15 +65,15 @@ classdef XML_Node < handle
         function x = build(x, file, pre)
             % Build an XML_Node in memory from an input file.
             %
-            % :param x:
+            % parameter x:
             %    Instance of class 'XML_Node'.
-            % :param file:
+            % parameter file:
             %    String input file name.
-            % :param pre:
+            % parameter pre:
             %    Determine the method of building. If not specified or less
             %    than zero, use XML_Node::build. Otherwise, use
             %    XML_Node::get_XML_File.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             checklib;
             
@@ -102,11 +102,11 @@ classdef XML_Node < handle
         function x = findbyID(root, id1)
             % Get an XML element given its ID.
             % 
-            % :param root:
+            % parameter root:
             %    Instance of class 'XML_Node'.
-            % :param id1:
+            % parameter id1:
             %    String ID of the element to search for.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             checklib;
             index = calllib(root.lib, 'xml_findID', root.id, id1);
@@ -116,11 +116,11 @@ classdef XML_Node < handle
         function x = findbyName(root, name)
             % Get an XML element given its name.
             % 
-            % :param root:
+            % parameter root:
             %    Instance of class 'XML_Node'.
-            % :param name:
+            % parameter name:
             %    String name of the element to search for.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             checklib;
             index = calllib(root.lib, 'xml_findByName', root.id, name);
@@ -136,9 +136,9 @@ classdef XML_Node < handle
         function a = attribute(x, key)
             % Get the XML_Node attribute with a given key. 
             %
-            % :param key:
+            % parameter key:
             %    String key to look up.
-            % :return:
+            % return:
             %    Instance of class 'XML_Node'.
             
             checklib;

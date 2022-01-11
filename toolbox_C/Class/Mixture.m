@@ -34,9 +34,9 @@ classdef Mixture < handle
             % store its own state information locally, and syncrhonizes the
             % phase objects whenever itrequires phase properties. 
             % 
-            % :param phases:
+            % parameter phases:
             %    Cell array of phases and mole numbers.
-            % :return:
+            % return:
             %    Instance of class 'Mixture'.
             
             checklib;
@@ -97,11 +97,11 @@ classdef Mixture < handle
         function addPhase(m, phase, moles)
             % Add a phase to the mixture
             %
-            % :param m:
+            % parameter m:
             %    Instance of class 'Mixture' to which phases is added.
-            % :param phase:
+            % parameter phase:
             %    Instance of class 'ThermoPhase' which should be added.
-            % :param moles:
+            % parameter moles:
             %    Number of moles of the phase to be added. Unit: kmol.
             
             checklib;
@@ -126,7 +126,7 @@ classdef Mixture < handle
         function temperature = get.T(m)
             % Get the temperature of the mixture.
             % 
-            % :return:
+            % return:
             %    Temperature in K.
             
             checklib;
@@ -136,7 +136,7 @@ classdef Mixture < handle
         function pressure = get.P(m)
             % Get the pressure of themixture.
             %
-            % :return:
+            % return:
             %    Pressure in Pa.
             
             checklib;
@@ -185,9 +185,9 @@ classdef Mixture < handle
         function moles = phaseMoles(m, n)
             % Get the number of moles of a phase in a mixture.
             % 
-            % :param n:
+            % parameter n:
             %    Integer phase number in the input.
-            % :return:
+            % return:
             %    Moles of phase number 'n'. Unit: kmol.
             
             checklib;
@@ -207,7 +207,7 @@ classdef Mixture < handle
         function mu = chemPotentials(m)
             % Get the chemical potentials of species in the mixture.
             % 
-            % :return:
+            % return:
             %    Vector of chemical potentials. Unit: J/kmol.
             
             checklib;
@@ -223,7 +223,7 @@ classdef Mixture < handle
         function m = set.T(m, temp)
             % Set the mixture temperature.
             %
-            % :param temp:
+            % parameter temp:
             %    Temperature to set. Unit: K.
             checklib;
             calllib(ct, 'mix_setTemperature', m.mixindex, temp);
@@ -232,7 +232,7 @@ classdef Mixture < handle
         function m = set.P(m, pressure)
             % Set the mixture pressure.
             %
-            % :param pressure:
+            % parameter pressure:
             %    Pressure to set. Unit: Pa. 
             checklib;
             calllib(ct, 'mix_setPressure', m.mixindex, pressure);
@@ -241,9 +241,9 @@ classdef Mixture < handle
         function setPhaseMoles(m, n, moles)
             % Set the number of moles of phase n in the mixture.
             %
-            % :param n:
+            % parameter n:
             %    Phase number.
-            % :param moles:
+            % parameter moles:
             %    Number of moles to set. Unit: kmol.
             checklib;
             calllib(ct, 'mix_setPhaseMoles', m.mixindex, n-1, moles);
@@ -256,7 +256,7 @@ classdef Mixture < handle
             % in the mixture. Note that the species may belong to any
             % phase, and unspecified species are set to zero.
             % 
-            % :param moles:
+            % parameter moles:
             %    Vector or string specifying the moles of species. 
             checklib;
             calllib(ct, 'mix_setMolesByName', m.mixindex, moles);
@@ -281,25 +281,25 @@ classdef Mixture < handle
             %     >> equilibrate(mix, 'TP);
             %     >> equilibrate('TP', 1.0e-6, 500);
             %
-            % :param XY:
+            % parameter XY:
             %    Two-letter string specifying the two properties to hold
             %    fixed. Currently 'TP', 'HP', 'TV', and 'SP' have been
             %    implemented. Default: 'TP'.
-            % :param err:
+            % parameter err:
             %    Error tolerance. Iteration will continue until delta_Mu/RT
             %    is less than this value for each reaction. Default:
             %    1.0e-9. 
-            % :param maxsteps:
+            % parameter maxsteps:
             %    Maximum number of steps to take while solving the
             %    equilibrium problem for specified T and P. Default: 1000.
-            % :param maxiter:
+            % parameter maxiter:
             %    Maximum number of temperature and/or pressure iterations.
             %    This is only relevant if a property pair other than (T,
             %    P)is specified. Default: 200.
-            % :param loglevel:
+            % parameter loglevel:
             %    Set to a value > 0 to write diagnostic output. Larger
             %    values generate more detailed information. 
-            % :return:
+            % return:
             %    The error in the solution. 
             
             checklib;

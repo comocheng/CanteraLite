@@ -40,7 +40,7 @@ classdef Func < handle
             % class 'Func1'. See the Cantera C++ documentation for more
             % details. 
             %
-            % :param typ:
+            % parameter typ:
             %    String indicating type of functor to create. Possible 
             %    values are:
             %    * 'polynomial'
@@ -53,11 +53,11 @@ classdef Func < handle
             %    * 'composite'
             %    * 'periodic'
             %
-            % :param n:
+            % parameter n:
             %    Number of parameters required for the functor
-            % :param p:
+            % parameter p:
             %    Vector of parameters
-            % :return:
+            % return:
             %    Instance of class :mat:func:`Func`
             
             checklib;
@@ -126,7 +126,7 @@ classdef Func < handle
         function display(a)
             % Display the equation of the input function on the terminal.
             %
-            % :param a:
+            % parameter a:
             %    Instance of class 'Func'
             
             disp(' ');
@@ -158,11 +158,11 @@ classdef Func < handle
         function b = subsref(a, s)
             % Redefine subscripted references for functors.
             %
-            % :param a:
+            % parameter a:
             %    Instance of class 'Func'
-            % :param s:
+            % parameter s:
             %    Value at which the function should be evaluated.
-            % :return:
+            % return:
             %    The value of the function evaluated at 's'.
 
             checklib;

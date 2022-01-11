@@ -8,13 +8,13 @@ classdef Interface < handle & ThermoPhase & Kinetics
         %% Interface class constructor
         
         function s = Interface(src, id, p1, p2, p3, p4)
-            % :param src:
+            % parameter src:
             %    CTI or CTML file containing the interface or edge phase.
-            % :param id:
+            % parameter id:
             %    Name of the interface or edge phase in the source file.
-            % :param p1/p2/p3/p4:
+            % parameter p1/p2/p3/p4:
             %    Adjoining phase to the interface;
-            % :return:
+            % return:
             %    Instance of class 'Interface'.
             
             checklib;
@@ -39,7 +39,7 @@ classdef Interface < handle & ThermoPhase & Kinetics
         function c = get.coverages(s)
             % Get the surface coverages of the species on an interface.
             %
-            % :return:
+            % return:
             %    If no output value is assigned, a bar graph will be
             %    plotted. Otherwise, a vector of length "n_surf_species"
             %    will be returned.
@@ -68,7 +68,7 @@ classdef Interface < handle & ThermoPhase & Kinetics
         function c = concentrations(s)
             % Get the concentrations of the species on an interface.
             %
-            % :return:
+            % return:
             %    If no output value is assigned, a bar graph will be
             %    plotted. Otherwise, a vector of length "n_surf_species"
             %    will be returned.
@@ -97,7 +97,7 @@ classdef Interface < handle & ThermoPhase & Kinetics
         function set.coverages(s, cov, norm)
             % Set surface coverages of the species on an interface.
             %
-            % :param cov:
+            % parameter cov:
             %    Coverage of the species. "Cov" can be either a vector of
             %    length "n_surf_species", or a string in the format
             %    "Species:Coverage, Species:Coverage".

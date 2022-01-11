@@ -48,7 +48,7 @@ classdef Transport < handle
         function v = viscosity(tr)
             % Get the dynamic viscosity.
             % 
-            % :return:
+            % return:
             %    Double dynamic viscosity. Unit: Pa*s.
             
             checklib;
@@ -63,7 +63,7 @@ classdef Transport < handle
         function v = thermalConductivity(tr)
             % Get the thermal conductivity.
             % 
-            % :return:
+            % return:
             %    Double thermal conductivity. Unit: W/m-K.
             
             checklib;
@@ -78,7 +78,7 @@ classdef Transport < handle
         function v = electricalConductivity(tr)
             % Get the electrical conductivity.
             % 
-            % :return:
+            % return:
             %    Double electrical conductivity. Unit: S/m.
             
             checklib;
@@ -93,7 +93,7 @@ classdef Transport < handle
         function v = mixDiffCoeffs(tr)
             % Get the mixture-averaged diffusion coefficients.
             % 
-            % :return:
+            % return:
             %    Vector of length nSpecies with the mixture-averaged
             %    diffusion coefficients. Unit: m^2/s. 
             
@@ -108,7 +108,7 @@ classdef Transport < handle
         function v = thermalDiffCoeffs(tr)
             % Get the thermal diffusion coefficients.
             % 
-            % :return:
+            % return:
             %    Vector of length nSpecies with the thermal diffusion
             %    coefficients. 
             
@@ -123,7 +123,7 @@ classdef Transport < handle
         function v = binDiffCoeffs(tr)
             % Get the binary diffusion coefficients.
             % 
-            % :return:
+            % return:
             %    A matrix of binary diffusion coefficients. The matrix is
             %    symmetric: d(i, j) = d(j, i). Unit: m^2/s.
             
@@ -138,7 +138,7 @@ classdef Transport < handle
         function v = multiDiffCoeffs(tr)
             % Get the multicomponent diffusion coefficients.
             % 
-            % :return:
+            % return:
             %    Vector of length nSpecies with the multicomponent
             %    diffusion coefficients. Unit: m^2/s. 
             
@@ -153,9 +153,9 @@ classdef Transport < handle
         function setParameters(tr, type, k, p)
             % Set the parameters.
             %
-            % :param type:
-            % :param k:
-            % :param p:
+            % parameter type:
+            % parameter k:
+            % parameter p:
         
             checklib;
             calllib(ct, 'trans_setParameters', tr.tr_id, type, k, p);
@@ -164,7 +164,7 @@ classdef Transport < handle
         function setThermalConductivity(tr, lam)
             % Set the thermal conductivity.
             %
-            % :param lam:
+            % parameter lam:
             %    Thermal conductivity in W/(m-K).
             
             checklib;

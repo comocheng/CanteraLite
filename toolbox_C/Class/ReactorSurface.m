@@ -21,17 +21,17 @@ classdef ReactorSurface < handle
             % after initial construction by using the various methods of
             % the 'ReactorSurface' class. 
             % 
-            % :param kleft:
+            % parameter kleft:
             %    Surface reaction mechanisms for the left-facing surface.
             %    This must bean instance of class 'Kinetics', or of a class
             %    derived from 'Kinetics', such as 'Interface'. 
-            % :param reactor:
+            % parameter reactor:
             %    Instance of class 'Reactor' to be used as the adjacent
             %    bulk phase. 
-            % :param area:
+            % parameter area:
             %    The area of the surface in m^2. Defaults to 1.0 m^2 if not
             %    specified.
-            % :return:
+            % return:
             %    Instance of class 'ReactorSurface'.
                                    
             checklib;
@@ -97,7 +97,7 @@ classdef ReactorSurface < handle
         
         function setKinetics(s, kin)
             % Setthe surface reaction mechanism on a reactor surface.
-            % :param kin:
+            % parameter kin:
             %    Instance of class 'Kinetics' (or another object derived
             %    from kin) to be used as the kinetic mechanism for this
             %    surface. Typically an instance of class 'Interface'.
