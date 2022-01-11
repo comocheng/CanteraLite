@@ -46,25 +46,25 @@ classdef Wall < handle
             % wall can be set by using empty strings or 0.0 for each of the
             % arguments before the velocity with no harm. 
             %
-            % :param left:
+            % parameter left:
             %    Instance of class 'Reactor' to be used as the bulk phase
             %    on the left side of the wall. 
-            % :param right:
+            % parameter right:
             %    Instance of class 'Reactor' to be used as the bulk phase
             %    on the right side of the wall.
-            % :param area:
+            % parameter area:
             %    The area of the wall in m^2. Defaults to 1.0 m^2 if not
             %    specified. 
-            % :param k:
+            % parameter k:
             %    Expansion rate coefficient in m/(s-Pa). Defaults to 0.0 if
             %    not specified. 
-            % :param u:
+            % parameter u:
             %    Heat transfer coefficient in W/(m^2-K). Defaults to 0.0 if
             %    not specified. 
-            % :param q:
+            % parameter q:
             %    Heat flux in W/m^2. Defaults to 0.0 if not specified. Must
             %    be an instance of 'Func'. 
-            % :param v:
+            % parameter v:
             %    Velocity of the wall in m/s. Defaults to 0.0 if not
             %    specified. Must be an instance of 'Func'.
             
@@ -167,7 +167,7 @@ classdef Wall < handle
         function setThermalResistance(w, r)
             % Set the thermal resistance.
             %
-            % :param r:
+            % parameter r:
             %    Thermal resistance. Unit: K*m^2/W.
             
             checklib;
@@ -177,7 +177,7 @@ classdef Wall < handle
         function setHeatTransferCoeff(w, u)
             % Set the thermal transfer coefficient.
             %
-            % :param u:
+            % parameter u:
             %    Heat transfer coefficient. Unit: W/(m^2-K).
             
             checklib;
@@ -187,7 +187,7 @@ classdef Wall < handle
         function setExpansionRateCoeff(w, k)
             % Set the expansion rate coefficient.
             %
-            % :param k:
+            % parameter k:
             %    Expanstion rate coefficient. Unit: m/(s-Pa).
             
             checklib;
@@ -202,7 +202,7 @@ classdef Wall < handle
             % to specify a constant heat flux by using the polynomial
             % functor with only the first term specified. 
             %
-            % :param f:
+            % parameter f:
             %    Instance of class 'Func'. Unit: W/m^2.
             
             checklib;
@@ -217,7 +217,7 @@ classdef Wall < handle
             % to specify a constant velocity by using the polynomial
             % functor with only the first term specified. 
             %
-            % :param f:
+            % parameter f:
             %    Instance of class 'Func'. Unit: m/s.
             
             checklib;

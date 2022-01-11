@@ -13,7 +13,7 @@ classdef FlowDevice < handle
         function x = FlowDevice(typ)
             % Flow Device class constructor.
             %
-            % :param typ:
+            % parameter typ:
             %    Type of flow device to be created. Type =
             %    'MassFlowController', 'PressureController' or 'Valve'.
             
@@ -53,9 +53,9 @@ classdef FlowDevice < handle
         function install(f, upstream, downstream)
             % Install a flow device between reactors or reservoirs.
             %
-            % :param upstream:
+            % parameter upstream:
             %    Upsteram 'Reactor' or 'Reservoir'.
-            % :param downstream:
+            % parameter downstream:
             %    Downstream 'Reactor' or 'Reservoir'.
             
             checklib;
@@ -77,9 +77,9 @@ classdef FlowDevice < handle
         function mdot = massFlowRate(f, time)
             % Get the mass flow rate at a given time.
             %
-            % :param time:
+            % parameter time:
             %    Time at which the mass flow rate is desired.
-            % :return:
+            % return:
             %    The mass flow rate through the flow device at the given
             %    time.
             
@@ -96,7 +96,7 @@ classdef FlowDevice < handle
         function setFunction(f, mf)
             % Set the time function with class 'func'.
             % 
-            % :param mf:
+            % parameter mf:
             %    Instance of class 'func'.
             
             checklib;
@@ -114,7 +114,7 @@ classdef FlowDevice < handle
         function setMassFlowRate(f, mdot)
             % Set the mass flow rate to a constant value. 
             %
-            % :param mdot:
+            % parameter mdot:
             %    Mass flow rate
             
             checklib;
@@ -136,7 +136,7 @@ classdef FlowDevice < handle
             % as long as this produces a positive value. If thsi expression
             % is negative, zero is returned. 
             %
-            % :param k:
+            % parameter k:
             %    Value fo the valve coefficient. Unit: kg/Pa-s.
             
             checklib;

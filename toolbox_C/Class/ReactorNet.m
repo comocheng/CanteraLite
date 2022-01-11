@@ -17,10 +17,10 @@ classdef ReactorNet < handle
             % to simultaneously advance the state of one or more coupled
             % reactors. 
             %
-            % :param reactors:
+            % parameter reactors:
             %    Instance of class 'Reactor' or a cell array of instance of
             %    'Reactor'. 
-            % :return:
+            % return:
             %    Instance of class 'ReactorNet'.
             
             checklib;
@@ -58,9 +58,9 @@ classdef ReactorNet < handle
         function addReactor(net, reactor)
             % Add a reactor to a network.
             %
-            % :param net:
+            % parameter net:
             %    Instance of class 'ReactorNet'.
-            % :param reactor:
+            % parameter reactor:
             %    Instance of class 'Solution'.
             
             checklib;
@@ -77,7 +77,7 @@ classdef ReactorNet < handle
             % an absolute time, not a time interval.) The integrator may
             % take many internal timesteps before reaching tout.
             % 
-            % :param tout:
+            % parameter tout:
             %    End time of the integration. Unit: s.
             
             checklib;
@@ -89,7 +89,7 @@ classdef ReactorNet < handle
         function setInitialTime(r, t)
             % Set the initial time of the integration.
             %
-            % :param t:
+            % parameter t:
             %    Time at which integration should be restarted, using the
             %    current state as the initial condition. Unit: s.
             
@@ -115,9 +115,9 @@ classdef ReactorNet < handle
         function setTolerances(r, rerr, aerr)
             % Set the error tolerance. 
             % 
-            % :param rtol:
+            % parameter rtol:
             %    Scalar relative error tolerance.
-            % :param atol:
+            % parameter atol:
             %    Scalar absolute error tolerance.
             
             checklib;

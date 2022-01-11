@@ -113,7 +113,7 @@ classdef ThermoPhase < handle
         function amu = atomicMasses(tp)
             % Get the atomic masses of the elements.
             %
-            % :return: 
+            % return: 
             %    Vector of element atomic masses. Unit: kg/kmol
             
             checklib;
@@ -128,7 +128,7 @@ classdef ThermoPhase < handle
         function e = charges(tp)
             % Get the array of species charges.
             %
-            % :return: 
+            % return: 
             %    Vector of species charges. Unit: elem. charge
             
             checklib;
@@ -149,9 +149,9 @@ classdef ThermoPhase < handle
             % indices start from 1 instead of 0 as in Cantera C++ and
             % Python interfaces. 
             %
-            % :param name:
+            % parameter name:
             %    String or cell array of elements whose index is requested
-            % :return:
+            % return:
             %    Integer number of elements in the phase.
             
             checklib;
@@ -226,7 +226,7 @@ classdef ThermoPhase < handle
         function mmw = meanMolecularWeight(tp)
             % Get the mean molecular weight.
             %
-            % :return:
+            % return:
             %    Double mean molecular weight. Unit: kg/kmol
             
             checklib;
@@ -242,7 +242,7 @@ classdef ThermoPhase < handle
         function mw = MolecularWeights(tp)
             % Get the array of molecular weights of all species.
             %
-            % :return: 
+            % return: 
             %   Vector of species molecular weights. Unit: kg/kmol
             
             checklib;
@@ -257,11 +257,11 @@ classdef ThermoPhase < handle
         function n = nAtoms(tp, species, element)
             % Get the number of atoms of an element in a species.
             %
-            % :param k: 
+            % parameter k: 
             %    String species name or integer species number.
-            % :param m:
+            % parameter m:
             %    String element name or integer element number.
-            % :return: 
+            % return: 
             %    Integer number of atoms of the element in the species.
             if nargin == 3
                 if ischar(species)
@@ -289,7 +289,7 @@ classdef ThermoPhase < handle
         function nel = nElements(tp)
             % Get the number of elements.
             %
-            % :return:
+            % return:
             %    Integer number of elements in the phase.
             
             checklib;
@@ -299,7 +299,7 @@ classdef ThermoPhase < handle
         function nsp = nSpecies(tp)
             % Get the number of species.
             %
-            % :return:
+            % return:
             %    Integer number of species in the phase.
             
             checklib;
@@ -315,9 +315,9 @@ classdef ThermoPhase < handle
             % indices start from 1 instead of 0 as in Cantera C++ and
             % Python interfaces. 
             %
-            % :param name:
+            % parameter name:
             %    String or cell array of species whose index is requested.
-            % :return:
+            % return:
             %    Integer number of species in the phase.
             
             checklib;
@@ -351,9 +351,9 @@ classdef ThermoPhase < handle
         function nm = speciesName(tp, k)
             % Get the name of a species given the index.
             %
-            % :param k: 
+            % parameter k: 
             %    Scalar or array of integer species index.
-            % :return: 
+            % return: 
             %    Cell array of strings species name. 
             [m, n] = size(k);
             nm = cell(m, n);
@@ -380,7 +380,7 @@ classdef ThermoPhase < handle
         function temperature = get.T(tp)
             % Get the temperature.
             %
-            % :return:
+            % return:
             %    Double temperature. Unit: K
             
             checklib;
@@ -390,7 +390,7 @@ classdef ThermoPhase < handle
         function pressure = get.P(tp)
             % Get the pressure.
             %
-            % :return:
+            % return:
             %    Double pressure. Unit: Pa
             
             checklib;
@@ -406,7 +406,7 @@ classdef ThermoPhase < handle
         function volume = get.V(tp)
             % Get the specific volume depending on the basis.
             %
-            % :return:
+            % return:
             %    Density depending on the basis. Units: 
             %    m^3/kmol (molar) m^3/kg (mass).
             volume = 1/tp.D;
@@ -415,7 +415,7 @@ classdef ThermoPhase < handle
         function moleFractions = get.X(tp)
             % Get the mole fractions of all species.
             %
-            % :return: 
+            % return: 
             %    Vector of species mole fractions. 
             
             checklib;
@@ -440,10 +440,10 @@ classdef ThermoPhase < handle
         function x = moleFraction(tp, species)
             % Get the mole fraction of one or a list of species.
             %
-            % :param species: 
+            % parameter species: 
             %    String or cell array of species whose mole fraction is
             %    requested.
-            % :return: 
+            % return: 
             %    Scalar or vector of species mole fractions.
             
             xarray = tp.X;
@@ -469,7 +469,7 @@ classdef ThermoPhase < handle
         function massFractions = get.Y(tp)
             % Get the mass fractions of all species.
             %
-            % :return: 
+            % return: 
             %   Vector of species mass fractions. 
             
             checklib;
@@ -494,10 +494,10 @@ classdef ThermoPhase < handle
         function y = massFraction(tp, species)
             % Get the mass fraction of one or a list of species.
             %
-            % :param species: 
+            % parameter species: 
             %    String or cell array of species whose mass fraction is
             %    requested.
-            % :return: 
+            % return: 
             %    Scalar or vector of species mass fractions.
             
             yy = tp.Y;
@@ -525,7 +525,7 @@ classdef ThermoPhase < handle
         function mu = chemical_potentials(tp)
             % Get the chemical potentials of the species.
             %
-            % :return: 
+            % return: 
             %    Vector of species chemical potentials. Unit: J/kmol.         
         
             checklib;
@@ -540,7 +540,7 @@ classdef ThermoPhase < handle
         function c = cv(tp)
             % Get the specific heat at constant volume.
             %
-            % :return:
+            % return:
             %    Specific heat of the mixture at constant volume depending
             %    on the basis. Units: J/kmol-K (molar) J/kg-K (mass).
             
@@ -556,7 +556,7 @@ classdef ThermoPhase < handle
         function c = cp(tp)
             % Get the specific heat at constant pressure.
             %
-            % :return:
+            % return:
             %    Specific heat of the mixture at constant pressure depending
             %    on the basis. Units: J/kmol-K (molar) J/kg-K (mass).
             
@@ -572,7 +572,7 @@ classdef ThermoPhase < handle
         function d = critDensity(tp)
             % Get the critical density.
             %
-            % :return:
+            % return:
             %    Critical density. Unit: K.  
             
             checklib;
@@ -582,7 +582,7 @@ classdef ThermoPhase < handle
         function p = critPressure(tp)
             % Get the critical pressure.
             %
-            % :return:
+            % return:
             %    Critical temperature. Unit: Pa.  
             
             checklib;
@@ -592,7 +592,7 @@ classdef ThermoPhase < handle
         function t = critTemperature(tp)
             % Get the critical temperature.
             %
-            % :return:
+            % return:
             %    Critical temperature. Unit: K.  
             checklib;
             t = calllib(ct, 'thermo_critTemperature', tp.tp_id);
@@ -601,7 +601,7 @@ classdef ThermoPhase < handle
         function v = electricPotential(tp)
             % Get the electric potential
             %
-            % :return:
+            % return:
             %    Electric potential of the phase. Unit: V.  
             
             checklib;
@@ -635,7 +635,7 @@ classdef ThermoPhase < handle
         function b = isothermalCompressibility(tp)
             % Get the isothermal compressibility
             %
-            % :return:
+            % return:
             %    Isothermal compressibility. Unit: 1/Pa.  
             
             checklib;
@@ -645,7 +645,7 @@ classdef ThermoPhase < handle
         function t = maxTemp(tp)
             % Get the maximum temperature of the parameter fits.
             %
-            % :return:
+            % return:
             %    Vector of maximum temperatures of all species. 
             
             checklib;
@@ -655,7 +655,7 @@ classdef ThermoPhase < handle
         function t = minTemp(tp)
             % Get the minimum temperature of the parameter fits.
             %
-            % :return:
+            % return:
             %    Vector of minimum temperatures of all species. 
             
             checklib;
@@ -665,9 +665,9 @@ classdef ThermoPhase < handle
         function p = P_sat(tp, t)
             % Get the saturation pressure for a given temperature.
             %
-            % :param t:
+            % parameter t:
             %    Temperature. Unit: K. 
-            % :return:
+            % return:
             %    Saturation pressure for temperature t. Unit: Pa.  
             
             checklib;
@@ -677,7 +677,7 @@ classdef ThermoPhase < handle
         function p = refPressure(tp)
             % Get the reference pressure.
             %
-            % :return:
+            % return:
             %    Reference pressure. Unit: Pa. 
             
             checklib;
@@ -697,7 +697,7 @@ classdef ThermoPhase < handle
             %
             %    c = sqrt(
             %
-            % :return:
+            % return:
             %    The speed of sound. Unit: m/s
             
             checklib;
@@ -722,7 +722,7 @@ classdef ThermoPhase < handle
         function a = thermalExpansionCoeff(tp)
             % Get the thermal expansion coefficient.
             %
-            % :return:
+            % return:
             %    Thermal expansion coefficient. Unit: 1/K.  
             
             checklib;
@@ -732,9 +732,9 @@ classdef ThermoPhase < handle
         function t = T_sat(tp, p)
             % Get the saturation temperature for a given pressure.
             %
-            % :param p:
+            % parameter p:
             %    Pressure. Unit: Pa. 
-            % :return:
+            % return:
             %    Saturation temperature for pressure p. Unit: K.  
             
             checklib;
@@ -744,7 +744,7 @@ classdef ThermoPhase < handle
         function v = vaporFraction(tp)
             % Get the vapor fractions.
             %
-            % :return:
+            % return:
             %    Vapor fraction.  
             
             checklib;
@@ -754,7 +754,7 @@ classdef ThermoPhase < handle
         function enthalpy = get.H(tp)
             % Get the enthalpy.
             %
-            % :return:
+            % return:
             %    Enthalpy of the mixture depending on the basis. 
             %    Units: J/kmol (molar) J/kg (mass).
             
@@ -770,7 +770,7 @@ classdef ThermoPhase < handle
         function enthalpy = enthalpies_RT(tp)
             % Get the non-dimensional enthalpy.
             %
-            % :return:
+            % return:
             %    Vector of standard-state species enthalpies divided by RT.
             
             checklib;
@@ -784,7 +784,7 @@ classdef ThermoPhase < handle
         function entropy = get.S(tp)
             % Get the entropy.
             %
-            % :return:
+            % return:
             %    Entropy of the mixture depending on the basis. 
             %    Units: J/kmol-K (molar) J/kg-K (mass).
             
@@ -800,7 +800,7 @@ classdef ThermoPhase < handle
         function intEnergy = get.U(tp)
             % Get the internal energy.
             %
-            % :return:
+            % return:
             %    Internal energy of the mixture depending on the basis. 
             %    Units: J/kmol (molar) J/kg (mass).
             
@@ -816,7 +816,7 @@ classdef ThermoPhase < handle
         function gibbs = get.G(tp)
             % Get the Gibss free energy.
             %
-            % :return:
+            % return:
             %    Gibbs free energy of the mixture depending on the basis. 
             %    Units: J/kmol (molar) J/kg (mass).
             
@@ -837,7 +837,7 @@ classdef ThermoPhase < handle
 
         function output = get.DPX(tp)
             % Get density, pressure, and mole fractions depending on the basis.
-            % :return:
+            % return:
             %    Density. Unit: kmol/m^3 (molar) kg/m^3 (mass).
             %    Pressure. Unit: Pa.
             %    Mole fractions of all species.
@@ -855,7 +855,7 @@ classdef ThermoPhase < handle
  
         function output = get.HPX(tp)
             % Get enthalpy, pressure, and mole fractions depending on the basis.
-            % :return:
+            % return:
             %    Enthalpy. Unit: J/kmol (molar) J/kg (mass).
             %    Pressure. Unit: Pa.
             %    Mole fractions of all species.

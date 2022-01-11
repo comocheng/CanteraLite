@@ -10,7 +10,7 @@ classdef Domain1D < handle
         %% Domain1D class constructor.
         
         function d = Domain1D(a, b, c)
-            % :param a:
+            % parameter a:
             %    Integer type of domain. Possible values are:
             %    * 1 - Stagnation Flow
             %    * 2 - Inlet1D
@@ -21,11 +21,11 @@ classdef Domain1D < handle
             %    * 8 - Sim1D
             %    * -2 - OutletRes
             %
-            % :param b:
+            % parameter b:
             %    Instance of class 'Solution' (for a == 1) or 'Interface'
             %    (for a == 6). Not used for all other valid values of 'a'.
             %
-            % :param c:
+            % parameter c:
             %    Integer, either 1 or 2, indicating whether an axisymmetric
             %    stagnation flow or a free flame should be created. If not
             %    specified, defaults to 1. Ignored if a!= 1.
@@ -98,12 +98,12 @@ classdef Domain1D < handle
         function n = componentIndex(d, name)
             % Get the index of a component given its name
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param name:
+            % parameter name:
             %    String name of the component to look up. If a numeric
             %    value is passed, it will be returned directly. 
-            % :return:
+            % return:
             %    Index of the component.
             
             checklib;
@@ -124,11 +124,11 @@ classdef Domain1D < handle
         function n = componentName(d, index)
             % Get the name of a component given its index.
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param n:
+            % parameter n:
             %    Integer or vector of integers of components' names.
-            % :return:
+            % return:
             %    Cell array of component names.
             
             checklib;
@@ -150,7 +150,7 @@ classdef Domain1D < handle
         function d = disableEnergy(d)
             % Disable the energy equation. 
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
             
             checklib;
@@ -161,7 +161,7 @@ classdef Domain1D < handle
         
         function i = domainIndex(d)
             % Get the domain index.
-            % :return:
+            % return:
             %    This function returns an integer flag denoting the
             %    location of the domain, beginning with 1 at the left.
             checklib;
@@ -176,7 +176,7 @@ classdef Domain1D < handle
         
         function i = domainType(d)
             % Get the type of domain.
-            % :return:
+            % return:
             %    This function returns an integer flag denoting the domain
             %    type.
             checklib;
@@ -185,7 +185,7 @@ classdef Domain1D < handle
         
         function d = enableEnergy(d)
             % Enable the energy equation. 
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
             
             checklib;
@@ -196,11 +196,11 @@ classdef Domain1D < handle
            
         function zz = gridPoints(d, n)
             % Get grid points from a domain.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param n:
+            % parameter n:
             %    Optional, vector of grid points to be retrieved.
-            % :return:
+            % return:
             %    Vector of grid points.
             
             checklib;
@@ -221,9 +221,9 @@ classdef Domain1D < handle
         
         function a = isFlow(d)
             % Determine whether a domain is a flow.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :return:
+            % return:
             %    1 if the domain is a flow domain, and 0 otherwise.
             
             checklib;
@@ -237,9 +237,9 @@ classdef Domain1D < handle
         
         function a = isInlet(d)
             % Determine whether a domain is an inlet.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :return:
+            % return:
             %    1 if the domain is an inlet, and 0 otherwise.
             
             checklib;
@@ -253,9 +253,9 @@ classdef Domain1D < handle
         
         function a = isSurface(d)
             % Determine whether a domain is a surface.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :return:
+            % return:
             %    1 if the domain is a surface, and 0 otherwise.
             
             checklib;
@@ -269,7 +269,7 @@ classdef Domain1D < handle
         
         function mdot = massFlux(d)
             % Get the mass flux.
-            % :return:
+            % return:
             %    The mass flux in the domain.
             checklib;
             mdot = calllib(ct, 'bdry_mdot', d.dom_id);
@@ -281,11 +281,11 @@ classdef Domain1D < handle
             % is the integer index of the species in the flow domain to
             % which the boundary domain is attached.
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'
-            % :param k:
+            % parameter k:
             %    Integer species index
-            % :return:
+            % return:
             %    Mass fraction of species
             
             checklib;
@@ -301,7 +301,7 @@ classdef Domain1D < handle
         
         function n = nComponents(d)
             % Get the number of components.
-            % :return:
+            % return:
             %    Number of variables at each grid point.
             checklib;
             n = calllib(ct, 'domain_nComponents', d.dom_id);
@@ -309,7 +309,7 @@ classdef Domain1D < handle
         
         function n = nPoints(d)
             % Get the number of grid points.
-            % :return:
+            % return:
             %    Integer number of grid points.
             checklib;
             n = calllib(ct, 'domain_nPoints', d.dom_id);
@@ -317,13 +317,13 @@ classdef Domain1D < handle
         
         function setBounds(d, component, lower, upper)
             % Set bounds on the solution components.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param component:
+            % parameter component:
             %    String, component to set the bounds on.
-            % :param lower:
+            % parameter lower:
             %    Lower bound.
-            % :param upper:
+            % parameter upper:
             %    Upper bound.
             checklib;
             n = d.componentIndex(component);
@@ -332,9 +332,9 @@ classdef Domain1D < handle
         
         function setCoverageEqs(d, onoff)
             % Enable or disable solving the coverage equations. 
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'
-            % :param onoff:
+            % parameter onoff:
             %    string, one of 'on' or 'yes' to turn solving the coverage
             %    equations on. One of 'off' or 'no' to turn off the
             %    coverage equation. 
@@ -364,9 +364,9 @@ classdef Domain1D < handle
             % an array of positions/temperatures, which may be in rows or
             % columns. 
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param profile:
+            % parameter profile:
             %    n x 2 or 2 x n array of 'n' points at which the
             %    temperature is specified.
             checklib;
@@ -383,7 +383,7 @@ classdef Domain1D < handle
         
         function setID(d, id)
             % Set the ID tag for a domain.
-            % :param id:
+            % parameter id:
             %    String ID to assign.
             checklib;
             calllib(ct, 'domain_setID', d.dom_id, id);
@@ -391,7 +391,7 @@ classdef Domain1D < handle
         
         function setMdot(d, mdot)
             % Set the mass flow rate.
-            % :param mdot:
+            % parameter mdot:
             %    Mass flow rate.
             checklib;
             calllib(ct, 'bdry_setTemperature', d.dom_id, mdot);
@@ -399,7 +399,7 @@ classdef Domain1D < handle
         
         function setMoleFractions(d, x)
             % Set the mole fractions.
-            % :param x:
+            % parameter x:
             %    String specifying the species and mole fractions in the
             %    format "'Spec:X,Spec2:X2'".
             checklib;
@@ -408,7 +408,7 @@ classdef Domain1D < handle
         
         function setPressure(d, p)
             % Set the pressure.
-            % :param p:
+            % parameter p:
             %    Pressure to be set. Unit: Pa.
             checklib;
             calllib(ct, 'bdry_setPressure', d.dom_id, p);
@@ -420,13 +420,13 @@ classdef Domain1D < handle
             % have a profile of its components set when it is part of a
             % 'Stack'. 
             %
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1d'.
-            % :param n:
+            % parameter n:
             %    Integer index of component, vector of component indices,
             %    string of component name, or cell array of strings of
             %    component names.
-            % :param p:
+            % parameter p:
             %    n x 2 array, whose columns are the relative (normalized)
             %    positions and the component values at those points. The
             %    number of positions 'n' is arbitrary.
@@ -440,15 +440,15 @@ classdef Domain1D < handle
         
         function setSteadyTolerances(d, component, rtol, atol)
             % Set the steady-state tolerances.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param component:
+            % parameter component:
             %    String or cell array of strings of component values whose
             %    tolerances should be set. If 'default' is specified, the
             %    tolerance of all components will be set.
-            % :param rtol:
+            % parameter rtol:
             %    Relative tolerance.
-            % :param atol:
+            % parameter atol:
             %    Absolute tolerance.
             
             checklib;
@@ -474,15 +474,15 @@ classdef Domain1D < handle
         
         function setTransientTolerances(d, component, rtol, atol)
             % Set the transient tolerances.
-            % :param d:
+            % parameter d:
             %    Instance of class 'Domain1D'.
-            % :param component:
+            % parameter component:
             %    String or cell array of strings of component values whose
             %    tolerances should be set. If 'default' is specified, the
             %    tolerance of all components will be set.
-            % :param rtol:
+            % parameter rtol:
             %    Relative tolerance.
-            % :param atol:
+            % parameter atol:
             %    Absolute tolerance.
             
             checklib;
