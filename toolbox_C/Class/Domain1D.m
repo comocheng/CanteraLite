@@ -31,19 +31,19 @@ classdef Domain1D < handle
             %    specified, defaults to 1. Ignored if a!= 1.
             
             checklib;
-            d.dom_id = 1;
+            d.dom_id = -1;
             
             if nargin == 1
                 if a == 2
-                    calllib(ct, 'inlet_new');
+                    d.dom_id = calllib(ct, 'inlet_new');
                 elseif a == 3
-                    calllib(ct, 'surf_new');
+                    d.dom_id = calllib(ct, 'surf_new');
                 elseif a == 4
-                    calllib(ct, 'symm_new');
+                    d.dom_id = calllib(ct, 'symm_new');
                 elseif a == 5
-                    calllib(ct, 'outlet_new');
+                    d.dom_id = calllib(ct, 'outlet_new');
                 elseif a == -2
-                    calllib(ct, 'outletres_new');
+                    d.dom_id = calllib(ct, 'outletres_new');
                 else
                     error('Not enough arguments for that job number');
                 end
@@ -206,15 +206,15 @@ classdef Domain1D < handle
             checklib;
             if nargin == 1
                 np = d.nPoints;
-                zz = zeros(1, d.np);
+                zz = zeros(1, np);
                 for i = 1:np
-                    zz(i) = calllib(ct, 'domain_grid', dom_id, i-1);
+                    zz(i) = calllib(ct, 'domain_grid', d.dom_id, i-1);
                 end
             else
                 m = length(n);
                 zz = zeros(1, m);
                 for i = 1:m
-                    zz(i) = calllib(ct, 'domain_grid', dom_id, n(i)-1);
+                    zz(i) = calllib(ct, 'domain_grid', d.dom_id, n(i)-1);
                 end
             end
         end
