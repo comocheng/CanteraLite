@@ -95,10 +95,10 @@ surf_phase.advanceCoverages(1.0);
 flow = AxisymmetricFlow(gas, 'flow');
 
 % set some parameters for the flow
-f.setPressure(p);
-f.setupGrid(initial_grid);
-f.setSteadyTolerances('default', tol_ss{:});
-f.setTransientTolerances('default', tol_ts{:});
+flow.setPressure(p);
+flow.setupGrid(initial_grid);
+flow.setSteadyTolerances('default', tol_ss{:});
+flow.setTransientTolerances('default', tol_ts{:});
 
 %% create the inlet 
 %

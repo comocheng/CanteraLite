@@ -15,11 +15,11 @@ function dydt = conuv(t, y, gas, mw) %#ok<INUSL>
     % energy equation
     wdot = gas.netProdRates;
     gas.basis = 'mass';
-    tdot = - gas.T * gasconstant * (gas.enthalpies_RT(gas) - ones(nsp,1))' ...
-        * wdot / (gas.D * gas.cv);
+    tdot = - gas.T * gasconstant * (gas.enthalpies_RT - ones(1, nsp)) ...
+        .* wdot / (gas.D * gas.cv);
 
     % set up column vector for dydt
-    dydt = [tdot,
+    dydt = [tdot'
             zeros(nsp, 1)];
 
     % species equations

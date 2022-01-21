@@ -11,8 +11,8 @@ function ignite_hp(gas)
     mw = gas.MolecularWeights;
     gas.TPX = {1001.0, oneatm, 'H2:2,O2:1,N2:4'};
 
-    y0 = [gas.T, 
-          gas.X];
+    y0 = [gas.T 
+          gas.X'];
     tel = [0, 0.001];
     options = odeset('RelTol', 1.e-5, 'AbsTol', 1.e-12, 'Stats', 'on');
     t0 = cputime;
